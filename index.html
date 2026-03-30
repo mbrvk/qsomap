@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R3TAV — QSO Map 29 March 2026</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: #eef2f7;
+  font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+  color: #1a2a3a;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px 24px 14px;
+  gap: 12px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.callsign { font-size: clamp(20px, 2.5vw, 36px); font-weight: 700; color: #2c3ea0; letter-spacing: 2px; }
+.date { font-size: clamp(11px, 1vw, 15px); color: #5a7090; margin-top: 3px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.badge {
+  background: #dde8f4;
+  border: 1px solid #b0c8e0;
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: clamp(10px, 0.8vw, 13px);
+  color: #2c5080;
+  white-space: nowrap;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+.stat {
+  background: #ffffff;
+  border: 0.5px solid #c0d4e8;
+  border-radius: 10px;
+  padding: 10px 16px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,40,100,0.06);
+}
+.stat-val { font-size: clamp(18px, 2vw, 28px); font-weight: 700; color: #1a2a3a; }
+.stat-lbl { font-size: clamp(10px, 0.75vw, 12px); color: #7a90a8; margin-top: 2px; }
+
+/* TOP CARDS */
+.top4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+.top-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  border-left: 3px solid #534AB7;
+  box-shadow: 0 1px 4px rgba(0,40,100,0.06);
+}
+.top-rank { font-size: clamp(10px, 0.75vw, 11px); color: #7a90a8; margin-bottom: 3px; }
+.top-call { font-size: clamp(14px, 1.2vw, 18px); font-weight: 700; color: #1a2a3a; }
+.top-dist { font-size: clamp(11px, 0.9vw, 14px); color: #1a5faa; font-weight: 600; margin: 3px 0; }
+.top-meta { font-size: clamp(10px, 0.75vw, 11px); color: #5a7090; line-height: 1.5; }
+.top-eff { font-size: clamp(10px, 0.75vw, 11px); color: #2e7a10; margin-top: 4px; font-weight: 500; }
+
+/* MAP */
+.map-area {
+  flex: 1;
+  min-height: 300px;
+  position: relative;
+}
+#c {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  border: 0.5px solid #b8cfe0;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0,40,100,0.08);
+}
+
+/* TOOLTIP */
+#tip {
+  position: absolute;
+  background: #ffffff;
+  border: 0.5px solid #b0c8e0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #1a2a3a;
+  pointer-events: none;
+  display: none;
+  z-index: 10;
+  max-width: 200px;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0,40,100,0.12);
+}
+
+/* LEGEND */
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 6px 0;
+}
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: clamp(10px, 0.8vw, 13px); color: #5a7090; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.footer { font-size: 11px; color: #8aa0b8; margin-left: auto; }
+
+@media (max-width: 768px) {
+  .wrap { padding: 12px 14px 10px; gap: 8px; }
+  .header { flex-direction: column; }
+  .badges { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <div class="callsign">R3TAV &nbsp;<span style="font-size:0.55em;color:#5a7090;font-weight:400">Mike · Dzerzhinsk, Russia</span></div>
+      <div class="date">LO16QF · ITU 29 · CQ 16 · RDA NN-15 &nbsp;|&nbsp; 29 March 2026</div>
+    </div>
+    <div class="badges">
+      <div class="badge">Xiegu X6200</div>
+      <div class="badge">Long Wire 16.2m · Balun 1:9</div>
+      <div class="badge">FT8 · QRP 8W</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">29</div><div class="stat-lbl">QSOs today</div></div>
+    <div class="stat"><div class="stat-val">13</div><div class="stat-lbl">DXCC entities</div></div>
+    <div class="stat"><div class="stat-val">8,045 km</div><div class="stat-lbl">Max distance</div></div>
+    <div class="stat"><div class="stat-val">4</div><div class="stat-lbl">Bands (17/15/30/40m)</div></div>
+  </div>
+
+  <div class="top4">
+    <div class="top-card" style="border-left-color:#EF9F27">
+      <div class="top-rank">🥇 1st · distance</div>
+      <div class="top-call">KE8MOI</div>
+      <div class="top-dist">8,045 km</div>
+      <div class="top-meta">17m FT8 · 14:39 UTC<br>Springfield, Michigan, USA</div>
+      <div class="top-eff">1,006 km/W @ 8W · TX -20 / RX -23</div>
+    </div>
+    <div class="top-card" style="border-left-color:#378ADD">
+      <div class="top-rank">🥈 2nd · distance</div>
+      <div class="top-call">JR1CFG</div>
+      <div class="top-dist">6,643 km</div>
+      <div class="top-meta">17m FT8 · 13:47 UTC<br>Tokyo, Japan</div>
+      <div class="top-eff">830 km/W @ 8W · TX +00 / RX -02</div>
+    </div>
+    <div class="top-card" style="border-left-color:#378ADD">
+      <div class="top-rank">🥉 3rd · distance</div>
+      <div class="top-call">JA1NGD</div>
+      <div class="top-dist">~6,600 km</div>
+      <div class="top-meta">17m FT8 · 13:25 UTC<br>Katori, Chiba, Japan</div>
+      <div class="top-eff">825 km/W @ 8W · TX -17 / RX -09</div>
+    </div>
+    <div class="top-card" style="border-left-color:#7bc043">
+      <div class="top-rank">4th · distance</div>
+      <div class="top-call">UA0SU</div>
+      <div class="top-dist">3,800 km</div>
+      <div class="top-meta">17m FT8 · 07:26 UTC<br>Irkutsk, Russia</div>
+      <div class="top-eff">475 km/W @ 8W · TX -04 / RX -03</div>
+    </div>
+  </div>
+
+  <div class="map-area">
+    <div id="tip"></div>
+    <canvas id="c"></canvas>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#378ADD"></div>17m</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#7bc043"></div>15m</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#EF9F27"></div>30m</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#E24B4A"></div>40m</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#D4537E"></div>20m</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>R3TAV QTH</div>
+    <div class="leg-item">— top-4 paths highlighted in dark blue</div>
+    <div class="footer">R3TAV HAM-Logger · 30 March 2026</div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+const BAND_COLORS={'17m':'#378ADD','15m':'#7bc043','30m':'#EF9F27','40m':'#E24B4A','20m':'#D4537E'};
+const HOME_LONLAT=[43.373,56.228];
+const TOP4=['KE8MOI','JR1CFG','JA1NGD','UA0SU'];
+
+const qsos=[
+  {call:'KE8MOI',grid:'EN72JH',band:'17m',name:'Paul L',qth:'Springfield, USA',rst_s:'-20',rst_r:'-23',time:'14:39'},
+  {call:'JR1CFG',grid:'PM86TF',band:'17m',name:'Ichi',qth:'Tokyo, Japan',rst_s:'+00',rst_r:'-02',time:'13:47'},
+  {call:'JA1FWS',grid:'QM05',band:'17m',name:'Tetsushiro',qth:'Japan',rst_s:'-03',rst_r:'-06',time:'13:36'},
+  {call:'F4HIL',grid:'JN29',band:'17m',name:'Eric Ryckaert',qth:'France',rst_s:'-12',rst_r:'-15',time:'13:29'},
+  {call:'S57XX',grid:'JN76',band:'17m',name:'Jure Vranicar',qth:'Slovenia',rst_s:'+09',rst_r:'-06',time:'13:26'},
+  {call:'JA1NGD',grid:'QM05GV',band:'17m',name:'Hiroyoshi',qth:'Katori, Japan',rst_s:'-17',rst_r:'-09',time:'13:25'},
+  {call:'PA3BGQ',grid:'JO22IB',band:'20m',name:'Robert',qth:'Netherlands',rst_s:'-23',rst_r:'-08',time:'12:58'},
+  {call:'SP5SMY',grid:'KO12DD',band:'17m',name:'Pawel',qth:'Poland',rst_s:'+03',rst_r:'-13',time:'12:04'},
+  {call:'IU5HIU',grid:'JN53DN',band:'17m',name:'Simona',qth:'Livorno, Italy',rst_s:'-18',rst_r:'-08',time:'11:58'},
+  {call:'4X1YA',grid:'KM72',band:'17m',name:'Yechiel Amir',qth:'Israel',rst_s:'-06',rst_r:'-07',time:'11:16'},
+  {call:'RJ3T',grid:'LO16VI',band:'40m',name:'Alexei',qth:'Nizhni Novgorod',rst_s:'-03',rst_r:'-10',time:'10:59'},
+  {call:'DK7ZT',grid:'JO40HT',band:'15m',name:'Bernd Mueller',qth:'Marburg, Germany',rst_s:'-09',rst_r:'-07',time:'08:29'},
+  {call:'DO2DK',grid:'JO30',band:'15m',name:'Jochen Strack',qth:'Siegen, Germany',rst_s:'-05',rst_r:'-08',time:'08:26'},
+  {call:'SV2HTW',grid:'KN10',band:'15m',name:'Manolis',qth:'Thessaloniki, Greece',rst_s:'-09',rst_r:'-12',time:'08:20'},
+  {call:'OM8LA',grid:'KN09',band:'15m',name:'Jan Adamjak',qth:'Slovakia',rst_s:'+11',rst_r:'+00',time:'08:18'},
+  {call:'Z62NS',grid:'KN02',band:'15m',name:'Naim Sadiku',qth:'Kosovo',rst_s:'-11',rst_r:'-04',time:'08:16'},
+  {call:'GW8CZW',grid:'IO73',band:'15m',name:'Alan Buxton',qth:'Wales, UK',rst_s:'-20',rst_r:'-04',time:'08:14'},
+  {call:'DA6SV',grid:'JO62',band:'15m',name:'Stefan Vogt',qth:'Berlin, Germany',rst_s:'-17',rst_r:'-12',time:'07:59'},
+  {call:'9A2KS',grid:'JN65',band:'15m',name:'Vlado Marinovic',qth:'Croatia',rst_s:'-04',rst_r:'-05',time:'07:56'},
+  {call:'R6OAG',grid:'KN88',band:'30m',name:'Evgenii',qth:'Donetsk',rst_s:'-06',rst_r:'-08',time:'07:36'},
+  {call:'RZ3DZ',grid:'KO85',band:'30m',name:'Vyacheslav',qth:'Vidnoe, Russia',rst_s:'+02',rst_r:'-04',time:'07:34'},
+  {call:'R7GA',grid:'LN14',band:'17m',name:'Vadim Bogdanov',qth:'Mineralnye Vody',rst_s:'-08',rst_r:'-07',time:'07:31'},
+  {call:'UA0SU',grid:'OO22',band:'17m',name:'Leonid Arsentev',qth:'Irkutsk, Russia',rst_s:'-04',rst_r:'-03',time:'07:26'},
+  {call:'DF7GG',grid:'JO42',band:'17m',name:'Wilhelm Jost',qth:'Hannover, Germany',rst_s:'+00',rst_r:'-07',time:'07:24'},
+  {call:'TA7TET',grid:'KN90',band:'17m',name:'Gokhan Vardar',qth:'Trabzon, Turkey',rst_s:'-17',rst_r:'-08',time:'07:21'},
+  {call:'OE8RPK',grid:'JN76',band:'17m',name:'Roland',qth:'Austria',rst_s:'-18',rst_r:'-18',time:'07:13'},
+];
+
+function maidenheadToLonLat(grid){
+  const g=grid.toUpperCase().trim();
+  let lon=(g.charCodeAt(0)-65)*20-180+parseInt(g[2])*2+1;
+  let lat=(g.charCodeAt(1)-65)*10-90+parseInt(g[3])+0.5;
+  if(g.length>=6){lon=lon-1+(g.charCodeAt(4)-65)/12+1/24;lat=lat-0.5+(g.charCodeAt(5)-65)/24+1/48;}
+  return[lon,lat];
+}
+
+function haversine(lon1,lat1,lon2,lat2){
+  const R=6371,r=Math.PI/180;
+  const dLat=(lat2-lat1)*r,dLon=(lon2-lon1)*r;
+  const a=Math.sin(dLat/2)**2+Math.cos(lat1*r)*Math.cos(lat2*r)*Math.sin(dLon/2)**2;
+  return Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+
+let worldData = null;
+let dots = [];
+
+async function loadWorld(){
+  const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r=>r.json());
+  worldData = topojson.feature(world, world.objects.countries);
+}
+
+function drawMap(){
+  const canvas = document.getElementById('c');
+  const area = canvas.parentElement;
+  const W = area.offsetWidth;
+  const H = area.offsetHeight;
+  if(!W||!H||!worldData) return;
+
+  const dpr = window.devicePixelRatio||1;
+  canvas.width = W*dpr;
+  canvas.height = H*dpr;
+  canvas.style.width = W+'px';
+  canvas.style.height = H+'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+
+  ctx.fillStyle='#eef2f7'; ctx.fillRect(0,0,W,H);
+
+  const proj = d3.geoNaturalEarth1().scale(W/6.2).translate([W/2,H/2]);
+  const pg = d3.geoPath().projection(proj).context(ctx);
+
+  ctx.beginPath(); pg({type:'Sphere'}); ctx.fillStyle='#b8d8f0'; ctx.fill();
+  ctx.beginPath(); pg(worldData);
+  ctx.fillStyle='#e4edf5'; ctx.strokeStyle='#98b8d0'; ctx.lineWidth=0.5;
+  ctx.fill(); ctx.stroke();
+  ctx.beginPath(); pg(d3.geoGraticule()());
+  ctx.strokeStyle='rgba(0,60,120,0.07)'; ctx.lineWidth=0.5; ctx.stroke();
+
+  const seen=new Set();
+  dots=[];
+
+  qsos.forEach(q=>{
+    const key=q.call+q.band;
+    if(seen.has(key))return;
+    seen.add(key);
+    let ll; try{ll=maidenheadToLonLat(q.grid);}catch(e){return;}
+    const[lon,lat]=ll;
+    if(isNaN(lon)||isNaN(lat))return;
+    const color=BAND_COLORS[q.band]||'#888';
+    const dist=haversine(HOME_LONLAT[0],HOME_LONLAT[1],lon,lat);
+    const isTop=TOP4.includes(q.call);
+
+    ctx.beginPath();
+    pg({type:'LineString',coordinates:[HOME_LONLAT,ll]});
+    ctx.strokeStyle=isTop?'#1a1a8a':color;
+    ctx.lineWidth=isTop?2.2:1.3;
+    ctx.globalAlpha=isTop?1:0.8;
+    ctx.stroke(); ctx.globalAlpha=1;
+
+    const px=proj(ll);
+    if(px) dots.push({x:px[0],y:px[1],color,call:q.call,name:q.name,qth:q.qth,band:q.band,rst_s:q.rst_s,rst_r:q.rst_r,dist,time:q.time,isTop});
+  });
+
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.isTop?7:5,0,Math.PI*2);
+    ctx.fillStyle=d.color; ctx.fill();
+    ctx.strokeStyle=d.isTop?'#ffffff':'rgba(255,255,255,0.8)';
+    ctx.lineWidth=d.isTop?2:1; ctx.stroke();
+    ctx.fillStyle=d.isTop?'#0a1a4a':'rgba(10,40,80,0.85)';
+    ctx.font=d.isTop?'bold 10px sans-serif':'9px sans-serif';
+    ctx.fillText(d.call,d.x+8,d.y+4);
+  });
+
+  const[hx,hy]=proj(HOME_LONLAT);
+  ctx.beginPath(); ctx.arc(hx,hy,8,0,Math.PI*2);
+  ctx.fillStyle='#3430a0'; ctx.fill();
+  ctx.strokeStyle='#ffffff'; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.fillStyle='#1a1a6a'; ctx.font='bold 11px sans-serif';
+  ctx.fillText('R3TAV',hx+11,hy+5);
+}
+
+const tip=document.getElementById('tip');
+document.getElementById('c').addEventListener('mousemove',e=>{
+  const canvas=e.target;
+  const rect=canvas.getBoundingClientRect();
+  const dpr=window.devicePixelRatio||1;
+  const sx=canvas.width/(rect.width*dpr);
+  const mx=(e.clientX-rect.left)*sx*dpr/dpr;
+  const my=(e.clientY-rect.top)*sx*dpr/dpr;
+  const found=dots.find(d=>Math.hypot(d.x-mx,d.y-my)<12);
+  if(found){
+    const eff=Math.round(found.dist/8);
+    tip.innerHTML=`<b>${found.call}</b><br>${found.name}<br>${found.qth}<br>${found.band} FT8 · ${found.time} UTC<br>TX ${found.rst_s} / RX ${found.rst_r}<br>${found.dist.toLocaleString()} км · ${eff} км/Вт`;
+    tip.style.display='block';
+    const pr=canvas.parentElement.getBoundingClientRect();
+    tip.style.left=(e.clientX-pr.left+12)+'px';
+    tip.style.top=(e.clientY-pr.top-10)+'px';
+    canvas.style.cursor='pointer';
+  } else {
+    tip.style.display='none';
+    canvas.style.cursor='default';
+  }
+});
+document.getElementById('c').addEventListener('mouseleave',()=>{tip.style.display='none';});
+
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(drawMap, 150);
+});
+
+loadWorld().then(drawMap);
+</script>
+</body>
+</html>
